@@ -11,25 +11,29 @@ bool exit()
 {
     char ch;
     cout << "ARE U SURE U WANT TO CLOSE THE APP ??" << endl
-             << "ALL OF THE DATA WILL BE LOST YES OR NO [Y/N]" << endl ;
+         << "ALL OF THE DATA WILL BE LOST YES OR NO [Y/N]" << endl;
+    cin.ignore();
     cin >> ch;
-    ch = toupper(ch) ; 
-    while (toupper(ch) != 'Y' || toupper(ch) != 'N')
+    ch = toupper(ch);
+    while (ch != 'Y' && ch != 'N')
     {
-        cout  << endl << "incorrect input yes or no only [Y/N] ";
+        cout << endl
+             << "incorrect input yes or no only [Y/N] ";
         cin >> ch;
+    }
+
     if (toupper(ch) == 'Y')
     {
-        return 1 ;
+        return 1;
     }
     else if (toupper(ch) == 'N')
     {
-        return 0 ; 
-    }
+        return 0;
     }
 
-    return 0 ;
+    return 0;
 }
+
 string toupperforreal(string value)
 {
     for (int i = 0; i < value.size(); i++)
@@ -59,8 +63,8 @@ void printbyid()
     for (int i = 0; i < bindex; i++)
     {
         cout << endl
-             << "id = " << bookid[i] << " name = " << books[i] << " total amount of the book is " 
-             << quantitiy[i] << endl ;
+             << "id = " << bookid[i] << " name = " << books[i] << " total amount of the book is "
+             << quantitiy[i] << endl;
     }
 }
 int main()
@@ -110,7 +114,7 @@ int main()
         }
         else if (choice == 4)
         {
-            printbyid() ;
+            printbyid();
         }
         else if (choice == 5)
         {
@@ -132,13 +136,15 @@ int main()
         }
         else if (choice == 11)
         {
-            if(exit())
+            int areYouSure = exit();
+
+            if (areYouSure)
             {
-                return 0 ;
+                return 0;
             }
-            else if (exit() == false)
+            else if (areYouSure)
             {
-                manu = false ; 
+                manu = true;
             }
         }
     }
