@@ -1,12 +1,99 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
+#include <unordered_map>
 using namespace std;
 vector<string> books;
 vector<int> quantitiy;
 vector<int> bookid;
 bool panel = false;
 int bindex = 0;
+vector<string> users ; 
+vector<int> usersid ; 
+vector<vector<string>> usersbooks ; 
+
+int useri = 0 ; 
+void adduser()
+{
+    string user ; 
+    cin >> user ; 
+    users.push_back(user) ;
+    usersbooks.push_back(users);
+    usersid.push_back(useri+100);
+    useri++ ;
+}
+void printwhobroow()
+{
+
+}
+void userbroow()
+{
+    string user ; 
+    string book ;
+    int booknum ; 
+    int usernum ; 
+    bool bookfound = false; 
+    bool userfound = false; 
+    cout << "\n" <<"Enter user name and book name :" ;
+    cin >> user >> book ; 
+    for (int i = 0 ; i < users.size() ; i++)
+    {
+        if (user == users[i])
+        {   
+            usernum = i ;
+            userfound = true ; 
+            cout << "\n" << "user exiest..." ;
+            break;
+        }
+    }
+    if (userfound = false)
+    {
+        cout << "\n" << "sorry cah the user does not exitest going back to menu" ; 
+        return ; 
+    }
+    for (int i = 0 ; i < books.size() ; i++)
+    {
+        if (book == books[i])
+        {
+            booknum = i ; 
+            bookfound = true ; 
+            cout << "\n" << "book found..." ;
+            break; 
+        }
+    }
+    if (bookfound = false)
+    {
+        cout << "\n" << "sorry bro we could not find the book u are look for going back to menu" ;
+        return ; 
+    }
+    if (quantitiy[booknum] - 1 > -1)
+    {
+        quantitiy[booknum] -= 1 ;
+        usersbooks[usernum].push_back(book) ;
+        cout << "\n" << "have the book now i think " ; 
+    }
+    else if (quantitiy[booknum] - 1 <= -1)
+    {
+        cout << "\n" << "this book has no copys left please add more of it then try again later" ; 
+    }
+    // if (quantitiy[booknum] == 0)
+    // {
+    //     books.erase
+    // }
+}
+void printwhobrow()
+{
+    cout << "\n" << "printing all users who browed books with books names...... ";
+    for (int i = 0 ; i < usersbooks.size() ; i++)
+    {
+        cout << "\n" << "The user  " << users[i] << " and the books are "; 
+        for (int j = 1 ; j < usersbooks[i].size() ; j++)
+        {
+            cout << "  " << usersbooks[i][j] ; 
+        }
+    }
+}
 bool exit()
 {
     char ch;
@@ -67,6 +154,19 @@ void printbyid()
              << quantitiy[i] << endl;
     }
 }
+void printbyname()
+{
+    
+    for (int i = 0 ; i < books.size() ; i++)
+    {
+        for (int j = 0 ; j < books[i].size(); j++)
+        {
+           
+        
+            
+        }
+    }
+}
 int main()
 {
     cout << "      ===================" << endl
@@ -86,7 +186,7 @@ int main()
     while (manu)
     {
         int choice;
-        cout << endl
+        cout << endl << endl 
              << "library Manu:" << endl
              << "1) add_book" << endl
              << "2) search_books_by_prefix" << endl
@@ -111,6 +211,7 @@ int main()
         }
         else if (choice == 3)
         {
+            printwhobrow();
         }
         else if (choice == 4)
         {
@@ -121,9 +222,11 @@ int main()
         }
         else if (choice == 6)
         {
+            adduser();
         }
         else if (choice == 7)
         {
+            userbroow();
         }
         else if (choice == 8)
         {
@@ -145,7 +248,7 @@ int main()
             else if (areYouSure)
             {
                 manu = true;
-            }
+            }  
         }
     }
 
